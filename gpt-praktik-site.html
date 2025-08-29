@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GPT-ПРАКТИК — 8-недельный практикум</title>
+  <meta name="description" content="GPT-ПРАКТИК — практикум по внедрению ChatGPT в блог: контент, прогревы, продажи без выгорания.">
+  <style>
+    :root{
+      --bg:#ffffff;
+      --ink:#0a0a0a;
+      --muted:#6b7280;
+      --card:#f7f7f8;
+      --border:#e6e7eb;
+      /* Яркие трендовые акценты 2025 в минимализме Apple: используем их дозированно */
+      --accent1:#7c3aed;  /* цифровая лаванда */
+      --accent2:#14b8a6;  /* нео-мята/кибер-лайм в мягком тоне */
+      --accent3:#ff6b6b;  /* коралл */
+      --shadow: 0 10px 30px rgba(16, 24, 40, .08);
+      --radius:14px;
+      --radius-sm:10px;
+      --max:1100px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,Arial,sans-serif;line-height:1.5; }
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+    header{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.8);backdrop-filter:saturate(180%) blur(16px);border-bottom:1px solid var(--border)}
+    .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+    .brand{display:flex;gap:10px;align-items:center;font-weight:700}
+    .logo{
+      width:28px;height:28px;border-radius:9px;
+      background:conic-gradient(from 220deg at 50% 50%, var(--accent1), var(--accent2), var(--accent3), var(--accent1));
+      box-shadow:0 6px 20px rgba(124,58,237,.35);
+    }
+    .nav a.button{padding:10px 16px;border:1px solid var(--border);border-radius:10px}
+    .nav .cta{background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#fff;border:none}
+    .navlinks{display:flex;gap:14px;align-items:center}
+    /* hero */
+    .hero{position:relative;overflow:hidden}
+    .blob{
+      position:absolute;inset:-10% -20% auto auto;height:480px;width:480px;filter:blur(60px);opacity:.25;pointer-events:none;
+      background:radial-gradient(40% 40% at 40% 40%, var(--accent1), transparent 70%),
+                 radial-gradient(40% 40% at 70% 60%, var(--accent2), transparent 70%),
+                 radial-gradient(35% 35% at 50% 40%, var(--accent3), transparent 70%);
+      transform:translate3d(0,0,0);
+    }
+    .hero .wrap{padding:56px 20px 28px}
+    h1{font-size:clamp(28px,4vw,44px);line-height:1.12;margin:8px 0 16px;letter-spacing:-.02em}
+    .lead{font-size:clamp(16px,2.2vw,20px);color:#111827;max-width:850px}
+    .meta{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 0;color:var(--muted);font-size:14px}
+    .chip{padding:8px 12px;border:1px solid var(--border);border-radius:999px;background:#fff}
+    .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin:26px 0 0}
+    .btn{
+      display:inline-flex;align-items:center;gap:10px;padding:14px 18px;border-radius:12px;font-weight:600;
+      border:1px solid var(--border);box-shadow:var(--shadow);transition:transform .15s ease, box-shadow .15s ease, background .2s ease;
+      background:#fff;
+    }
+    .btn:hover{transform:translateY(-1px);box-shadow:0 14px 32px rgba(16,24,40,.12)}
+    .btn-primary{background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#fff;border:none}
+    .btn-ghost{background:transparent}
+    /* sections */
+    section{padding:56px 0;border-top:1px solid var(--border)}
+    h2{font-size:clamp(22px,3vw,32px);letter-spacing:-.01em;margin:0 0 18px}
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+    .muted{color:var(--muted)}
+    /* Audience list */
+    .list{display:grid;gap:10px}
+    .li{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid var(--border);border-radius:12px;padding:12px 14px}
+    .icon{
+      width:22px;height:22px;border-radius:6px;background:linear-gradient(135deg,var(--accent1),var(--accent2));flex:0 0 22px;
+      display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:14px;
+      box-shadow:0 6px 18px rgba(20,184,166,.25);
+    }
+    /* program timeline */
+    .timeline{position:relative;display:grid;gap:14px}
+    .timeline::before{content:"";position:absolute;left:12px;top:0;bottom:0;width:2px;background:linear-gradient(var(--accent1),var(--accent2))}
+    .step{position:relative;padding-left:34px;background:#fff;border:1px solid var(--border);border-radius:12px;padding:12px 14px}
+    .step::before{content:"";position:absolute;left:6px;top:14px;width:12px;height:12px;border-radius:50%;
+      background:linear-gradient(135deg,var(--accent1),var(--accent2));box-shadow:0 0 0 4px #fff}
+    .step h3{margin:0 0 6px;font-size:18px}
+    /* two-column blocks */
+    .two{display:grid;grid-template-columns:1.2fr 1fr;gap:18px}
+    @media (max-width:900px){.two{grid-template-columns:1fr}}
+    /* price */
+    .price{
+      background:linear-gradient(180deg, rgba(124,58,237,.06), rgba(20,184,166,.06));
+      border:1px solid var(--border);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow)
+    }
+    .price h3{margin:0 0 12px;font-size:22px}
+    .price .tag{display:inline-block;padding:6px 10px;border-radius:999px;background:#111;color:#fff;font-size:12px;margin-left:8px}
+    .price .row{display:flex;flex-wrap:wrap;gap:12px;margin:14px 0}
+    .kpi{display:flex;gap:10px;align-items:center;padding:10px 12px;border:1px dashed var(--border);border-radius:10px;background:#fff}
+    .strike{color:var(--muted);text-decoration:line-through}
+    /* faq */
+    details{border:1px solid var(--border);border-radius:12px;padding:14px 16px;background:#fff}
+    details+details{margin-top:10px}
+    summary{cursor:pointer;font-weight:600}
+    /* footer */
+    footer{padding:40px 0;color:var(--muted)}
+    /* sticky mobile bar */
+    .sticky-cta{display:none;position:fixed;left:0;right:0;bottom:0;z-index:50;background:rgba(255,255,255,.9);backdrop-filter:blur(8px);border-top:1px solid var(--border);padding:10px 16px}
+    .sticky-cta .wrap{display:flex;gap:10px;align-items:center;justify-content:space-between}
+    @media (max-width:860px){.sticky-cta{display:block} .navlinks{display:none}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap nav">
+      <div class="brand"><div class="logo" aria-hidden="true"></div><span>GPT-ПРАКТИК</span></div>
+      <nav class="navlinks">
+        <a href="#forwhom">Для кого</a>
+        <a href="#program">Программа</a>
+        <a href="#format">Формат</a>
+        <a href="#price" class="button cta">Присоединиться</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="blob" aria-hidden="true"></div>
+      <div class="wrap">
+        <h1>8-недельный практикум, который превращает ChatGPT в часть твоего мышления</h1>
+        <p class="lead">Стабильный контент, прогревы и продажи без выгорания и продюсеров. Практика важнее теории: работаем вживую, внедряем шаг за шагом, собираем систему под тебя.</p>
+        <div class="meta">
+          <span class="chip">Формат: живые воркшопы в ZOOM + поддержка</span>
+          <span class="chip">Длительность: 8 недель</span>
+        </div>
+        <div class="cta-row">
+          <a href="#price" class="btn btn-primary">Присоединиться</a>
+          <a href="#program" class="btn">Смотреть программу</a>
+          <a href="https://t.me/" class="btn btn-ghost">Написать в Telegram</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="forwhom">
+      <div class="wrap two">
+        <div class="card">
+          <h2>Кому подойдёт</h2>
+          <div class="list">
+            <div class="li"><span class="icon">✓</span><div>Эксперт, продюсер, маркетолог, которому стало тяжело вести контент и нет сил снова «вытягивать из себя»</div></div>
+            <div class="li"><span class="icon">✓</span><div>Пробовал ChatGPT, но тексты получались сухие, банальные, не про тебя</div></div>
+            <div class="li"><span class="icon">✓</span><div>Чувствуешь, что блог работает слабее, хочешь продавать легче и честнее</div></div>
+            <div class="li"><span class="icon">✓</span><div>Нужна система, где ИИ помогает раскрыть личность, а не заменяет</div></div>
+          </div>
+          <p class="muted" style="margin-top:12px">На каждом созвоне ты уходишь с готовым постом, сценарием или частью воронки. Ты платишь за внедрение, а не за информацию.</p>
+        </div>
+        <div class="card">
+          <h2>Что получишь на выходе</h2>
+          <div class="list">
+            <div class="li"><span class="icon">✓</span><div>Нейросеть, настроенная под тебя и говорящая твоими словами</div></div>
+            <div class="li"><span class="icon">✓</span><div>Стабильный контент высокого качества с твоими смыслами</div></div>
+            <div class="li"><span class="icon">✓</span><div>Прогревы, собранные в воронку, с готовыми текстами</div></div>
+            <div class="li"><span class="icon">✓</span><div>Видео, визуал и сторис, которые делаются быстрее и лучше</div></div>
+            <div class="li"><span class="icon">✓</span><div>Ощущение опоры, ясности и контроля над блогом</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="program">
+      <div class="wrap">
+        <h2>Программа обучения</h2>
+        <div class="timeline">
+          <div class="step">
+            <h3>Модуль 1. Фундамент</h3>
+            <p class="muted">Настраиваем ChatGPT так, чтобы он думал как ты. Убираем сухость, создаём базу и переносим в ИИ твои смыслы.</p>
+          </div>
+          <div class="step">
+            <h3>Модуль 2. Ты в ИИ</h3>
+            <p class="muted">Перенос личности, речи и целей в нейросеть. Настройка памяти и кастомного GPT под тебя. Поиск смыслов через исследование ЦА.</p>
+          </div>
+          <div class="step">
+            <h3>Модуль 3. Контент без выгорания</h3>
+            <p class="muted">Потоковое создание текстов, прогревов и сторителлингов. Контент-цепочки, которые вовлекают, продают и привлекают аудиторию.</p>
+          </div>
+          <div class="step">
+            <h3>Модуль 4. Бесплатная аудитория</h3>
+            <p class="muted">Вирусные посты-карусели: от идеи и заголовка до текста и визуала. Рост блога без рекламы.</p>
+          </div>
+          <div class="step">
+            <h3>Модуль 5. Запуски и продажи без выгорания</h3>
+            <p class="muted">Воронка, упаковка и прогрев к продукту с помощью ИИ. Тексты для эфиров и лид-магниты. Деньги уже на обучении.</p>
+          </div>
+          <div class="step">
+            <h3>Модуль 6. ИИ-визуал</h3>
+            <p class="muted">Премиум-упаковка блога и личного бренда. Генерация визуала в твоём стиле, подбор референсов и обучение ИИ на твоих фото.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="format">
+      <div class="wrap two">
+        <div class="card">
+          <h2>Формат работы</h2>
+          <div class="list">
+            <div class="li"><span class="icon">✓</span><div>8 живых воркшопов в ZOOM - работаем в реальном времени</div></div>
+            <div class="li"><span class="icon">✓</span><div>Малая группа до 20 человек - личная работа вместо вебинара на 300</div></div>
+            <div class="li"><span class="icon">✓</span><div>Разбор домашних заданий - личная обратная связь</div></div>
+            <div class="li"><span class="icon">✓</span><div>База промтов и личные GPTs - инструменты под ключ</div></div>
+            <div class="li"><span class="icon">✓</span><div>Доступ к материалам навсегда</div></div>
+          </div>
+        </div>
+        <div class="price">
+          <h3>Участие и оплата <span class="tag">малая группа</span></h3>
+          <div class="row">
+            <div class="kpi"><span class="strike">100&nbsp;000 руб</span> → <strong>39&nbsp;900 руб</strong></div>
+            <div class="kpi">20&nbsp;800 грн</div>
+            <div class="kpi">439 евро</div>
+          </div>
+          <p class="muted" style="margin:10px 0 18px">Можно оплатить в 2 платежа - 50% сразу и 50% через месяц.</p>
+          <div class="cta-row">
+            <a href="#price" class="btn btn-primary">Оставить заявку</a>
+            <a href="https://t.me/" class="btn">Задать вопрос в Telegram</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="price">
+      <div class="wrap">
+        <h2>Записаться на GPT-ПРАКТИК</h2>
+        <div class="grid">
+          <div class="card" style="grid-column:span 12;">
+            <p>Оставь заявку, чтобы занять место в группе. Я вернусь с деталями и проведу короткое интервью, чтобы убедиться, что формат подойдёт.</p>
+            <form onsubmit="event.preventDefault(); alert('Спасибо за заявку. Я свяжусь с тобой в Telegram.');">
+              <div class="grid" style="grid-template-columns:repeat(12,1fr);gap:12px">
+                <div style="grid-column:span 4;min-width:220px">
+                  <label for="name">Имя</label>
+                  <input id="name" name="name" required placeholder="Твоё имя" style="width:100%;padding:12px 14px;margin-top:6px;border:1px solid var(--border);border-radius:10px;background:#fff">
+                </div>
+                <div style="grid-column:span 4;min-width:220px">
+                  <label for="tg">Telegram</label>
+                  <input id="tg" name="tg" required placeholder="@username" style="width:100%;padding:12px 14px;margin-top:6px;border:1px solid var(--border);border-radius:10px;background:#fff">
+                </div>
+                <div style="grid-column:span 4;min-width:220px">
+                  <label for="email">Email</label>
+                  <input id="email" type="email" name="email" placeholder="you@example.com" style="width:100%;padding:12px 14px;margin-top:6px;border:1px solid var(--border);border-radius:10px;background:#fff">
+                </div>
+              </div>
+              <div style="display:flex;gap:12px;align-items:center;margin-top:14px">
+                <button class="btn btn-primary" type="submit">Отправить</button>
+                <a class="btn" href="https://t.me/">Оплатить и написать</a>
+              </div>
+              <p class="muted" style="margin-top:10px">Нажимая кнопку, ты соглашаешься с обработкой персональных данных.</p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="wrap">
+        <h2>Частые вопросы</h2>
+        <details>
+          <summary>Я новичок в ChatGPT. Смогу ли я успевать</summary>
+          <div class="muted" style="margin-top:8px">Да. Мы начинаем с настройки твоего профиля и базы промтов. На каждом шаге получаешь готовые шаблоны и примеры. Задача - не знание, а внедрение.</div>
+        </details>
+        <details>
+          <summary>Если пропущу один из созвонов</summary>
+          <div class="muted" style="margin-top:8px">Будет запись и конспект. Плюс поддержка в чате, чтобы закрыть пробелы.</div>
+        </details>
+        <details>
+          <summary>Что нужно подготовить до старта</summary>
+          <div class="muted" style="margin-top:8px">Ссылку на блог, описание твоего продукта и 2-3 примера постов, которые отражают твою подачу. Этого достаточно.</div>
+        </details>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div style="display:flex;align-items:center;gap:10px"><div class="logo"></div><strong>GPT-ПРАКТИК</strong></div>
+      <p class="muted">© 2025. Все права защищены. Этот сайт создан через ИИ по моим правилам и смыслам.</p>
+    </div>
+  </footer>
+
+  <div class="sticky-cta">
+    <div class="wrap">
+      <strong>GPT-ПРАКТИК</strong>
+      <a href="#price" class="btn btn-primary">Присоединиться</a>
+    </div>
+  </div>
+
+  <script>
+    // Плавная прокрутка
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        const id = a.getAttribute('href').slice(1);
+        const el = document.getElementById(id);
+        if(el){
+          e.preventDefault();
+          window.scrollTo({top: el.getBoundingClientRect().top + window.scrollY - 64, behavior:'smooth'});
+        }
+      });
+    });
+  </script>
+</body>
+</html>
